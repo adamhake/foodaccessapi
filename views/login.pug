@@ -1,0 +1,10 @@
+doctype html
+html(lang=en)
+  head
+    title= login
+  body
+    h1 Login!
+    form(action="/login", method="POST")
+      input(name="username" placeholder="Username", type="text")
+      input(name="password", placeholder="Password", type="password")
+      input(name="submit" type="submit")
