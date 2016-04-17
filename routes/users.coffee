@@ -1,3 +1,10 @@
+# -----------------------------------------------
+#
+# Router: Users API
+# - Handles Users REST API
+#
+# -----------------------------------------------
+
 mongoose = require 'mongoose'
 express  = require 'express'
 router   = express.Router()

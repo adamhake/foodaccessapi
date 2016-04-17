@@ -22,7 +22,7 @@ module.exports.requestToObject = (req, store = false) ->
     store.address = address
     store.benefits = benefits
     store.myPlate = myPlate
-    store.hours: hours
+    store.hours = hours
     store.name = name
   else
     store =

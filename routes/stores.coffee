@@ -1,8 +1,14 @@
+# -----------------------------------------------
+#
+# Router: Store API
+# - Handles REST store api
+#
+# -----------------------------------------------
+
 mongoose = require 'mongoose'
 express  = require 'express'
 router   = express.Router()
 Store    = require '../models/store'
-
 
 # GET /stores : Return all stores
 # -------------------------------
@@ -18,7 +24,6 @@ router.post '/', (req, res) ->
   store.save (err, store) ->
     res.send err if err
     res.status(201).json store
-
 
 # GET /stores/:store_id : Return a single store
 # ---------------------------------------------

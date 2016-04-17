@@ -31,7 +31,7 @@ module.exports.init = () ->
 
   passport.use "login", strategy
 
-module.exports.ensureAuthenticated = (req, res, next) ->
+module.exports.isAuthenticated = (req, res, next) ->
   if req.isAuthenticated()
     next()
   else
