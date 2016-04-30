@@ -48,4 +48,11 @@ storeSchema.pre "save", (done) ->
     else
       done()
 
+# Virtual Getters
+
+storeSchema.virtual "humanCreated"
+.get ->
+  _date = new Date(this.createdAt)
+  return _date.toLocaleDateString()
+
 module.exports = mongoose.model 'Store', storeSchema
