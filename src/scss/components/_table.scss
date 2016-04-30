@@ -1,0 +1,29 @@
+.store-list{
+  width: 100%;
+  max-width: 1200px;
+  margin: 4rem auto;
+  border-spacing: 0;
+  color: #3B3131;
+  font-family: font(sans);
+
+  thead{
+    text-align: left;
+    th{
+      padding: 0.25rem 0.65rem;
+      border-bottom: 2px solid lighten(#3B3131, 20);
+    }
+  }
+
+  tbody td{
+    padding: 0.65rem;
+
+    &:nth-last-child(-n+2){
+      text-align: right;
+    }
+  }
+
+  tbody tr:nth-child(even){
+    background-color: lighten(#AAB6BD, 25);
+  }
+
+}
