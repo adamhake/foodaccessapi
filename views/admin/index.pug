@@ -1,8 +1,23 @@
-html(lang=en)
-  head
-    title= login
-  body
-    h1 Admin.index
-    each store in stores
-      h2=store.name
-    pre= user
+extends ../main
+
+block content
+  table(class="store-list")
+    thead
+      tr
+        th Name
+        th Category
+        th Created
+        th(data-dynatable-no-sort="true")
+        th(data-dynatable-no-sort="true")
+    tbody
+      each store in stores
+        - var id = store._id
+        tr
+          td
+            a(href="/store/" + store._id)= store.name
+          td Category
+          td= store.humanCreated
+          td
+            a(href="/store/" + store._id + "/edit") Edit
+          td
+            a(href="/store/" + store._id + "/delete") Delete
