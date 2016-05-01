@@ -19,7 +19,7 @@ User         = require '../models/user'
 
 # GET /stores : Return all stores
 # -------------------------------
-router.get '/stores', (req, res) ->
+router.get '/stores', authHelpers.isAuthenticated, (req, res) ->
   Store.find {}
   .sort
     name: 1
@@ -32,14 +32,14 @@ router.get '/stores', (req, res) ->
 
 # GET /stores/new : New store form
 # --------------------------------
-router.get '/stores/new', (req, res) ->
+router.get '/stores/new', authHelpers.isAuthenticated, (req, res) ->
   res.render 'admin/new',
     user: req.user
     menu: "new"
 
 # POST /stores/new : Create new store
 # -----------------------------------
-router.post '/stores/new', (req, res) ->
+router.post '/stores/new', authHelpers.isAuthenticated, (req, res) ->
   console.log req.body
   store = new Store storeHelpers.requestToObject req
   store.save (err, store) ->
@@ -47,7 +47,7 @@ router.post '/stores/new', (req, res) ->
 
 # GET /stores/:store_id : Show store detail
 # -----------------------------------------
-router.get '/stores/:store_id', (req, res) ->
+router.get '/stores/:store_id', authHelpers.isAuthenticated, (req, res) ->
   Store.findById req.params.store_id, (err, store) ->
     res.status(500).send err if err
     res.render 'admin/show',
@@ -56,7 +56,7 @@ router.get '/stores/:store_id', (req, res) ->
 
 # GET /stores/:store_id/edit : Store edit form
 # --------------------------------------------
-router.get '/stores/:store_id/edit', (req, res) ->
+router.get '/stores/:store_id/edit', authHelpers.isAuthenticated, (req, res) ->
   Store.findById req.params.store_id, (err, store) ->
     res.status(500).send err if err
     res.render 'admin/edit',
@@ -66,7 +66,7 @@ router.get '/stores/:store_id/edit', (req, res) ->
 
 # POST /stores/:store_id/edit : Update Stores
 # --------------------------------------------
-router.post '/stores/:store_id/edit', (req, res) ->
+router.post '/stores/:store_id/edit', authHelpers.isAuthenticated, (req, res) ->
   console.log req.body
   Store.findById req.params.store_id, (err, store) ->
     res.status(400).send err if err
@@ -77,7 +77,7 @@ router.post '/stores/:store_id/edit', (req, res) ->
 
 # GET /stores/:store_id/delte : Delete store
 # ------------------------------------------
-router.get '/stores/:store_id/delete', (req, res) ->
+router.get '/stores/:store_id/delete', authHelpers.isAuthenticated, (req, res) ->
   Store.remove
     _id: req.params.store_id
   , (err) ->
@@ -90,10 +90,10 @@ router.get '/stores/:store_id/delete', (req, res) ->
 
 # GET /users/:user_id : User settings
 # ------------------------------------------
-router.get "/users/:user_id", (req, res) ->
+router.get "/users/:user_id", authHelpers.isAuthenticated, (req, res) ->
   User.findById req.params.user_id, (err, user) ->
     res.status(400).send err if err
-    res.render "admin/user/show",s
+    res.render "admin/user/show",
       user: req.user
       referrer: req.get "Referrer"
       menu: "settings"

@@ -19,7 +19,8 @@ router.use (req, res, next) ->
 # GET /login : Auth form
 # -------------------------------
 router.get '/login', (req, res) ->
-  res.render "login"
+  res.render "login",
+    login: true
 
 # POST /login : authenticate user
 # -------------------------------
