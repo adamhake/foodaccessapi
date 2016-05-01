@@ -27,6 +27,8 @@ module.exports.requestToObject = (req, store = false) ->
     store.hours = hours
     store.name = req.body.name
     store.phone = req.body.phone
+    store.category = req.body.category
+    store.public = if req.body.public then true else false
   else
     store =
       address: address
@@ -35,4 +37,6 @@ module.exports.requestToObject = (req, store = false) ->
       hours: hours
       name: req.body.name
       phone: req.body.phone
+      category: req.body.category
+      public: if req.body.public then true else false
   return store
