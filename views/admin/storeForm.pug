@@ -2,50 +2,79 @@ script.
   console.log(!{JSON.stringify(store)});
 form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new' method="POST")
   fieldset(class="form-element")
-    legend Store Name
+    legend
+      i(class="fa fa-building icon -inline")
+      | Store Name
     input(required type="text" name="name" placeholder="Name" value=store ? store.name : "")
   fieldset(class="form-element")
-    legend Address
+    legend
+      i(class="fa fa-map-marker icon -inline")
+      | Address
     input(required type="text" name="streetAddress" placeholder="Street Address" value= store ? store.address.street : "")
     input(type="text" name="streetAddressAux" placeholder="Street Address Aux" value= store? store.address.streetAux : "")
     input(required type="text" name="city" placeholder="City" value= store ? store.address.city : "")
     input(required type="text" name="state" placeholder="State" value= store ? store.address.state : "VA")
     input(required type="text" name="zipcode" placeholder="Zipcode" value= store ? store.address.zipcode : "")
   fieldset(class="form-element")
-    legend Phone
+    legend
+      i(class="fa fa-phone icon -inline")
+      | Phone
     input(type="text" name="phone" placeholder="Phone" value = store ? store.phone : "")
   fieldset(class="form-element")
-    legend benefits
-    label
-      input(type="checkbox" name="benefits" value="wic" checked= store ? store.benefits.wic : false)
-      | WIC
-    label
-      input(type="checkbox" name="benefits" value="snap" checked= store ? store.benefits.snap : false)
-      | SNAP
-    label
-      input(type="checkbox" name="benefits" value="freshOptions" checked= store ? store.benefits.freshOptions : false)
-      | Fresh Options
-  fieldset(class="form-elemt")
-    legend My Plate Offerings
-    label
-      input(type="checkbox" name="myPlate" value="myPlateDairy" checked= store ? store.myPlate.dairy : false)
-      | Dairy
-    label
-      input(type="checkbox" name="myPlate" value="myPlateProtein" checked= store ? store.myPlate.protein : false)
-      | Protein
-    label
-      input(type="checkbox" name="myPlate" value="myPlateGrain" checked= store ? store.myPlate.grain : false)
-      | Grains
-    label
-      input(type="checkbox" name="myPlate" value="myPlateVeggie" checked= store ? store.myPlate.veggie : false)
-      | Vegetables
-    label
-      input(type="checkbox" name="myPlate" value="myPlateFruit" checked= store ? store.myPlate.fruit : false)
-      | Fruit
+    legend
+      i(class="fa fa-shopping-basket icon -inline")
+      | Store Category
+    div(class="select-form-element")
+      i(class="fa fa-caret-down")
+      p(class="select-form-element-selection")
+        | Select Category
+      input(type="hidden" name="category" value= store ? store.category: "healthyCornerStore")
+      ul(class="select-form-element-options -hidden")
+        li(class="select-form-element-option" data-value="farmersMarket") Farmer's Market
+        li(class="select-form-element-option" data-value="fullScale") Full Scale
+        li(class="select-form-element-option" data-value="healthyCornerStore") Healthy Corner Store
+        li(class="select-form-element-option" data-value="other") Other
   fieldset(class="form-element")
-    legend hours
+    legend
+      i(class="fa fa-users icon -inline")
+      | Benefits
+
+    div(class="multi-select-group")
+      span(class="mult-select-option" data-value="wic") WIC
+      span(class="mult-select-option" data-value="snap") SNAP
+      span(class="mult-select-option" data-value="freshOptions") Fresh Options
+    input(class="-hidden" type="checkbox" name="benefits" value="wic" checked= store ? store.benefits.wic : false)
+    input(class="-hidden" type="checkbox" name="benefits" value="snap" checked= store ? store.benefits.snap : false)
+    input(class="-hidden" type="checkbox" name="benefits" value="freshOptions" checked= store ? store.benefits.freshOptions : false)
+  fieldset(class="form-element")
+    legend
+      i(class="fa fa-cutlery icon -inline")
+      | My Plate Offerings
+
+    div(class="multi-select-group")
+      span(class="mult-select-option" data-value="myPlateDairy") Dairy
+      span(class="mult-select-option" data-value="myPlateProtein") Proteins
+      span(class="mult-select-option" data-value="myPlateGrain") Grains
+      span(class="mult-select-option" data-value="myPlateVeggie") Vegetables
+      span(class="mult-select-option" data-value="myPlateFruit") Fruits
+    input(class="-hidden" type="checkbox" name="myPlate" value="myPlateDairy" checked= store ? store.myPlate.dairy : false)
+    input(class="-hidden" type="checkbox" name="myPlate" value="myPlateProtein" checked= store ? store.myPlate.protein : false)
+    input(class="-hidden" type="checkbox" name="myPlate" value="myPlateGrain" checked= store ? store.myPlate.grain : false)
+    input(class="-hidden" type="checkbox" name="myPlate" value="myPlateVeggie" checked= store ? store.myPlate.veggie : false)
+    input(class="-hidden" type="checkbox" name="myPlate" value="myPlateFruit" checked= store ? store.myPlate.fruit : false)
+  fieldset(class="form-element")
+    legend
+      i(class="fa fa-clock-o icon -inline")
+      | Hours
     input(type="text" name="hoursDays" placeholder="Days Open" value= store ? store.hours.days : "")
-    input(type="text" name="hoursMonths" placeholder="Days Open" value= store ? store.hours.months : "")
+    input(type="text" name="hoursMonths" placeholder="Months Open" value= store ? store.hours.months : "")
   fieldset(class="form-element")
-    input(type="submit" value="Save")
-    a(href=referrer ? referrer : "/stores") Cancel
+    legend
+      i(class="fa fa-lock icon -inline")
+      | Status
+    div(class="multi-select-group")
+      span(class="mult-select-option" data-value="public") Public
+    input(class="-hidden" type="checkbox" name="public" value="public" checked= store ? store.public : true)
+  fieldset(class="form-element")
+    button(type="submit") Save
+    a(href=referrer ? referrer : "/stores" class="button -secondary") Cancel

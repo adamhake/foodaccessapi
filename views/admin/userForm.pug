@@ -1,8 +1,0 @@
-form
-  fieldset(class="form-element")
-    input(type="username" placeholder="username" value= user ? user.username : "")
-    input(type="email" placeholder="email" value = user ? user.email : "")
-    input(type="password", value= "" placeholder="New Password")
-  fieldset(class="form-element")
-    input(type="submit" value="Save")
-    a(href=referrer ? referrer : "/stores") Cancel

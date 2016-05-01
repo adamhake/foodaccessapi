@@ -1,7 +1,8 @@
 header
-  nav(class="header-section")
-    a(href="/stores" class= menu == "stores" ? "header-link active" : "header-link") All Stores
-    a(href="/stores/new" class= menu == "new" ? "header-link active" : "header-link") New Store
-  .header-section
-    a(href= user ? "/user/" + user._id : "#" class= menu == "settings" ? "header-link active" : "header-link") User Settings
-    a(href="/" class="header-link") Logout
+  div(class="wrapper -flex")
+    nav(class="header-section")
+      a(href="/stores" class= menu == "stores" ? "header-link active" : "header-link") All Stores
+      a(href="/stores/new" class= menu == "new" ? "header-link active" : "header-link") New Store
+    .header-section
+      a(href= user ? "/users/" + user._id : "#" class= menu == "settings" ? "header-link active" : "header-link") User Settings
+      a(href="/" class="header-link") Logout

@@ -2,4 +2,69 @@ extends ../main
 
 block content
   .wrapper
-    
+    h3(class="title -with-subtitle")=store.name
+    .section
+      div(id="map" class="map" data-lat=store.coordinates.lat data-lng=store.coordinates.lng)
+    .two-col
+      .section
+        h4(class="subheading -content") Status
+        p(class="-large")= store.public ? "Public" : "Private"
+      .section
+        h4(class="subheading -content") Address
+        p(class="-large")= store.address.street
+        if store.address.streetAux
+          p= store.address.streetAux
+        p(class="-large") #{store.address.city}, #{store.address.state} #{store.address.zipcode}
+      .section
+        h4(class="subheading -content") Phone
+        p(class="-large")= store.humanPhone
+    .two-col
+      .section
+        h4(class="subheading -content") Category
+        p(class="-large")= store.humanCategory
+      .section
+        h4(class="subheading") Benefits
+        if store.benefits.wic
+          span(class="mult-select-option -active -display") WIC
+        else
+          span(class="mult-select-option -display") WIC
+
+        if store.benefits.snap
+          span(class="mult-select-option -active -display") SNAP
+        else
+          span(class="mult-select-option -display") SNAP
+
+        if store.benefits.freshOptions
+          span(class="mult-select-option -active -display") Fresh Options
+        else
+          span(class="mult-select-option -display") Fresh Options
+      .section
+        h4(class="subheading") My Plate Offerings
+        if store.myPlate.dairy
+          span(class="mult-select-option -active -display") Dairy
+        else
+          span(class="mult-select-option -display") Dairy
+
+        if store.myPlate.fruit
+          span(class="mult-select-option -active -display") fruits
+        else
+          span(class="mult-select-option -display") fruits
+
+        if store.myPlate.grain
+          span(class="mult-select-option -active -display") Grains
+        else
+          span(class="mult-select-option -display") Grains
+
+        if store.myPlate.protein
+          span(class="mult-select-option -active -display") Protein
+        else
+          span(class="mult-select-option -display") Protein
+
+        if store.myPlate.veggie
+          span(class="mult-select-option -active -display") Vegetables
+        else
+          span(class="mult-select-option -display") Vegetables
+  .wrapper
+    .section
+      a(href="/stores/"+ store._id + "/edit" class="button") Edit
+      a(href="/stores/"+ store._id + "/delete" class="button -secondary") Delete

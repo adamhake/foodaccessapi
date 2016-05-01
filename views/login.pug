@@ -1,10 +1,15 @@
-doctype html
-html(lang=en)
-  head
-    title= login
-  body
-    h1 Login!
-    form(action="/login", method="POST")
-      input(name="username" placeholder="Username", type="text")
-      input(name="password", placeholder="Password", type="password")
-      input(name="submit" type="submit")
+extends ./main
+
+block content
+  div(class="wrapper -very-thin")
+    h1(class="title -centered") Food Access Database
+    p Please log in to continue
+    .section
+      form(action="/login", method="POST" class="-very-thin")
+        fiedset(class="form-element")
+          legend Username
+          input(name="username" placeholder="Username", type="text")
+          legend Password
+          input(name="password", placeholder="Password", type="password")
+        fieldset(class="form-element")
+          button(type="submit") Login

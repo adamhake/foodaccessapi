@@ -1,0 +1,11 @@
+form(class="form" action="/users/"+user._id+"/edit" method="POST")
+  fieldset(class="form-element")
+    legend Username
+    input(required type="text" name="userame" placeholder="username" value= user ? user.username : "")
+    legend Email
+    input(required type="email" placeholder="email" value = user ? user.email : "")
+    legend Password
+    input(type="password", value= "" placeholder="New Password")
+  fieldset(class="form-element")
+    button(type="submit") Save
+    a(href=referrer ? referrer : "/stores") Cancel
