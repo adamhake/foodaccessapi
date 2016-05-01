@@ -1,28 +1,8 @@
-.sidebar{
-  width: 25%;
-  max-width: 375px;
-  height: 100%;
-  background-color: #DFEEF0;
-  padding: 1rem;
-}
-
-
-.admin-nav{
-  margin-top: 2rem;
-  a{
-    font-family: "Open Sans";
-    font-weight: 400;
-    display: inline-block;
-    color: #3B3131;
-    font-size: 1.15rem;
-  }
-}
-
 header{
   display: flex;
   justify-content: space-between;
-  background-color: #DFEEF0;
   padding: 1rem;
+  border-bottom: 1px solid tint(color(text), 90%);
 }
 
 .header-section{
@@ -31,17 +11,5 @@ header{
 }
 
 .header-link{
-  font-weight: 700;
-  color: #1D2529;
-  padding: 0.65rem;
-  border-radius: 0.5rem;
-  &.active{
-    background-color: darken(#DFEEF0, 10);
-  }
-  &:hover{
-    background-color: darken(#DFEEF0, 10);
-  }
-  & + & {
-    margin-left: 0.5rem;
-  }
+  @extend .-buttoned;
 }

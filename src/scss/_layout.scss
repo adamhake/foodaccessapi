@@ -1,0 +1,36 @@
+.wrapper{
+  &:not(.-flex){
+    @include clearfix;
+  }
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  &.-margin{
+    margin: 1rem auto;
+  }
+  &.-flex{
+    display: flex;
+    justify-content: space-between;
+  }
+  &.-thin{
+    max-width: 1000px;
+  }
+  &.-very-thin{
+    max-width: 600px;
+  }
+}
+
+.two-col{
+  position: relative;
+  width: 49%;
+  float: left;
+
+  &:first-child{
+    margin-right: 2%;
+  }
+
+}
+
+.section{
+  margin: 1rem 0;
+}

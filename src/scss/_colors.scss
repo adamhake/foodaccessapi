@@ -1,0 +1,31 @@
+$colors: (
+  secondary: (
+    base: #91AA9D,
+    lighter: tint(#91AA9D, 10%),
+    lightest: tint(#91AA9D, 20%),
+    darker: shade(#91AA9D, 10%),
+    darkest: shade(#91AA9D, 20%)
+  ),
+  primary: (
+    base: #3E606F,
+    lighter: tint(#3E606F, 10%),
+    lightest: tint(#3E606F, 20%),
+    darker: shade(#3E606F, 10%),
+    darkest: shade(#3E606F, 20%)
+  ),
+  text: (
+    base: #373D3F,
+    lighter: #555F61,
+    lightest: #707C80,
+    dark: #131516
+  ),
+  striping: (
+    base: #F2F4F5,
+    darker: shade(#F2F4F5, 10%)
+  )
+);
+
+
+@function color($color, $tone: 'base') {
+    @return map-get(map-get($colors, $color), $tone);
+}

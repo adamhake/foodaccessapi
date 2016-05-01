@@ -1,9 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800|Prata);
 
 @function font($type){
-  $font: "Open Sans";
+  $font: "ff-tisa-sans-web-pro";
   @if $type == "serif" {
-    $font: "Prata";
+    $font: "ff-tisa-web-pro";
   }
   @return $font;
+}
+
+span{
+  &.-flare{
+    color: #fff;
+    &:hover{
+      color: color(primary, lightest);
+    }
+  }
 }

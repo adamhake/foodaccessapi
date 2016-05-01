@@ -10,3 +10,25 @@
   }
 
 }
+
+.title{
+  font-family: font(serif);
+  margin: 2rem 0;
+  color: color(text);
+
+  &.-with-subtitle{
+    margin-bottom: 0.5rem;
+  }
+}
+
+.subheading{
+  color: color(text);
+  text-transform: uppercase;
+  font-family: font(serif);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  &.-content{
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,44 @@
+
+a {
+    text-decoration: none;
+    padding: 0.25rem 0.75rem;
+
+    & + & {
+      margin-left: 0.5rem;
+    }
+
+    &:hover{
+        color: color(primary, lighter);
+    }
+
+    &.-inverted{
+      color: #fff;
+    }
+
+    &.-inline{
+      padding: 0;
+      font-weight: 700;
+      &.-inverted:hover{
+        color: color(primary, lightest);
+      }
+    }
+
+    &.-buttoned{
+      border-radius: 0.75rem;
+      padding: 0.5rem 0.75rem;
+      font-weight: 600;
+        &:hover{
+          background-color: color(primary);
+          color: #fff;
+        }
+        &.active{
+          background-color: color(primary);
+          color: #fff;
+        }
+        &.-inverted:hover{
+          background-color: #fff;
+          color: color(primary);
+        }
+    }
+
+}

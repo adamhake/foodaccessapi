@@ -1,0 +1,138 @@
+form{
+  margin-bottom: 5rem;
+  fieldset{
+    display: block;
+    border: none;
+    margin: 1rem 0;
+    padding: 0;
+  }
+  input{
+    font-size: 1.15rem;
+    font-family: font(sans);
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    color: color(text, darker);
+    &.-hidden{
+      display: none;
+    }
+  }
+  legend{
+    @extend .subheading;
+  }
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"]{
+  width: 100%;
+  max-width: 610px;
+  border: none;
+  background-color: color(striping);
+}
+
+input[name="city"] {
+  width: 51%;
+  margin-right: 2%;
+}
+
+input[name="state"]{
+  width: 15%;
+  margin-right: 2%;
+}
+
+input[name="zipcode"]{
+  width: 30%;
+}
+
+button[type="submit"]{
+  @extend .button;
+}
+
+select.-hidden{
+  display: none;
+}
+
+.select-form-element{
+  position: relative;
+  transition: all 0.35s ease;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 1rem;
+
+  .fa-caret-down{
+    transition: all 0.25s ease;
+    text-align: right;
+    position: absolute;
+    right: 1rem;
+    top: 0.75rem;
+    font-size: 1.2rem;
+    opacity: 1;
+    visibility: visible;
+  }
+  &:hover{
+    .fa-caret-down{
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
+.select-form-element-options{
+  position: absolute;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.35s ease;
+  width: 100%;
+
+  &.-hidden{
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.select-form-element-selection{
+  background-color: color(striping);
+  padding: 0.5rem;
+  font-family: font(sans);
+}
+
+.select-form-element-option{
+  padding: 0.5rem;
+  font-family: font(sans);
+  line-height: 1.5;
+  background-color: color(striping);
+  cursor: pointer;
+  box-sizing: border-box;
+  &:hover{
+    background-color: color(striping, darker);
+  }
+  &:first-child{
+    border-top: 2px solid color(striping, darker);
+  }
+}
+
+.multi-select-group{
+  margin-bottom: 1rem;
+  font-size: 0;
+}
+
+.mult-select-option{
+  transition: all 0.35s ease;
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border: 2px solid color(striping, darker);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 600;
+  &.-display{
+    cursor: default;
+  }
+  & + &{
+    margin-left: 1rem;
+  }
+  &:hover:not(.-display),
+  &.-active{
+    background-color: color(striping, darker);
+  }
+}

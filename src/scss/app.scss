@@ -1,6 +1,16 @@
+@import "./mixins";
+@import "./functions";
+@import "./colors";
 @import "./typography";
 @import "./base";
+@import "./layout";
 
+@import "components/footer";
+@import "components/links";
+@import "components/icons";
+@import "components/buttons";
 @import "components/headings";
 @import "components/sidebar";
 @import "components/table";
+@import "components/maps";
+@import "components/form";
