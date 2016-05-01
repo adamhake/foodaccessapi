@@ -4,17 +4,19 @@ module.exports.requestToObject = (req, store = false) ->
     streetAux: req.body.streetAddressAux
     city: req.body.city
     state: req.body.state
-    zip: req.body.zip
-  benefits =
-    freshOptions: req.body.freshOptions
-    snap: req.body.snap
-    wic: req.body.wic
-  myPlate =
-    dairy: req.body.myPlateDairy
-    fruit: req.body.myPlateFruit
-    grain: req.body.myPlateGrain
-    protein: req.body.myPlateProtein
-    veggie: req.body.myPlateVeggie
+    zipcode: parseInt(req.body.zipcode)
+  if req.body.myPlate
+    benefits =
+      freshOptions: if req.body.benefits.indexOf("freshOptions") == -1 then false else true
+      snap: if req.body.benefits.indexOf("snap") == -1 then false else true
+      wic: if req.body.benefits.indexOf("wic") == -1 then false else true
+  if req.body.myPlate
+    myPlate =
+      dairy: if req.body.myPlate.indexOf("myPlateDairy") == -1 then false else true
+      fruit: if req.body.myPlate.indexOf("myPlateFruit") == -1 then false else true
+      grain: if req.body.myPlate.indexOf("myPlateGrain") == -1 then false else true
+      protein: if req.body.myPlate.indexOf("myPlateProtein") == -1 then false else true
+      veggie: if req.body.myPlate.indexOf("myPlateVeggie") == -1 then false else true
   hours =
     days: req.body.hourDays
     months: req.body.hourMonths
@@ -23,7 +25,8 @@ module.exports.requestToObject = (req, store = false) ->
     store.benefits = benefits
     store.myPlate = myPlate
     store.hours = hours
-    store.name = name
+    store.name = req.body.name
+    store.phone = req.body.phone
   else
     store =
       address: address
@@ -31,4 +34,5 @@ module.exports.requestToObject = (req, store = false) ->
       myPlate: myPlate
       hours: hours
       name: req.body.name
+      phone: req.body.phone
   return store
