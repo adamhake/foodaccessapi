@@ -7,6 +7,7 @@ storeSchema = mongoose.Schema
     type: String
     required: true
     unique: false
+  category: String
   address:
     street: String
     streetAux: String
@@ -30,9 +31,17 @@ storeSchema = mongoose.Schema
     grain: Boolean
     protein: Boolean
     veggie: Boolean
+  public: Boolean
   createdAt:
       type: Date
       default: Date.now
+
+# categoryMap
+categoryMap =
+  farmersMarket: "Farmer's Market"
+  fullScale: "Full Scale"
+  healthyCornerStore: "Healthy Corner Store"
+  other: "Other"
 
 
 # Method: Geocode address
@@ -54,5 +63,20 @@ storeSchema.virtual "humanCreated"
 .get ->
   _date = new Date(this.createdAt)
   return _date.toLocaleDateString()
+
+storeSchema.virtual "humanPhone"
+.get ->
+  phone = this.phone
+  areaCode = phone.slice 0, 3
+  firstThree = phone.slice 3, 6
+  lastFour = phone.slice 6
+  return "(" + areaCode + ")" + " " + firstThree + "-" + lastFour
+
+storeSchema.virtual "humanCategory"
+.get ->
+  if this.category
+    return categoryMap[this.category]
+  else
+    return ""
 
 module.exports = mongoose.model 'Store', storeSchema
