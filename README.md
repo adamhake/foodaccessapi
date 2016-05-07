@@ -5,3 +5,4 @@
 Api and store resource manager for the Richmond Health Department.
 
 Project Lead: Adam
+RHD Contact: Glencora, Claire
