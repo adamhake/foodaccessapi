@@ -1,6 +1,5 @@
-_ = require "lodash"
+_     = require "lodash"
 Store = require "../models/store"
-
 
 module.exports.requestToObject = (req, store = false) ->
   address =
