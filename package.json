@@ -5,8 +5,8 @@
   "main": "app.coffee",
   "scripts": {
     "test": "mocha --timeout 5000 --compilers coffee:coffee-script/register",
-    "build": "gulp sass && webpack",
-    "run": "coffeee app.coffee"
+    "install": "gulp sass && webpack",
+    "start": "coffee app.coffee"
   },
   "author": "CodeForRVA",
   "license": "ISC",
@@ -34,7 +34,8 @@
     "passport": "0.3.2",
     "passport-local": "1.0.0",
     "pug": "2.0.0-alpha6",
-    "request": "2.72.0"
+    "request": "2.72.0",
+    "webpack": "1.13.0"
   },
   "devDependencies": {
     "babel-core": "6.8.0",
@@ -43,7 +44,6 @@
     "chai": "^3.5.0",
     "gulp-babel": "6.1.2",
     "mocha": "^2.4.5",
-    "supertest": "1.2.0",
-    "webpack": "1.13.0"
+    "supertest": "1.2.0"
   }
 }
