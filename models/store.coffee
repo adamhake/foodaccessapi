@@ -79,10 +79,13 @@ storeSchema.virtual "humanCreated"
 storeSchema.virtual "humanPhone"
 .get ->
   phone = this.phone
-  areaCode = phone.slice 0, 3
-  firstThree = phone.slice 3, 6
-  lastFour = phone.slice 6
-  return "(" + areaCode + ")" + " " + firstThree + "-" + lastFour
+  if phone
+    areaCode = phone.slice 0, 3
+    firstThree = phone.slice 3, 6
+    lastFour = phone.slice 6
+    return "(" + areaCode + ")" + " " + firstThree + "-" + lastFour
+  else
+    return ""
 
 storeSchema.virtual "humanCategory"
 .get ->
