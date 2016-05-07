@@ -9,13 +9,14 @@ mongoose = require 'mongoose'
 express  = require 'express'
 router   = express.Router()
 Store    = require '../models/store'
+helpers  = require '../helpers/storeHelpers'
 
 # GET /stores : Return all stores
 # -------------------------------
 router.get '/', (req, res) ->
   Store.find (err, stores) ->
     res.send err if err
-    res.json stores
+    res.json helpers.formatResponse stores
 
 # POST /stores : Create a Store and return it
 # -------------------------------------------

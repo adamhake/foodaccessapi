@@ -66,3 +66,5 @@ app.use '/', adminRouter
 
 app.listen process.env.port, ->
   console.log "Listening on port #{process.env.port}"
+
+module.exports = app

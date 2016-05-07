@@ -4,7 +4,7 @@
   "description": "API for RDH Health Food Store Database",
   "main": "app.coffee",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha  --timeout 5000 --compilers coffee:coffee-script/register",
     "build": "gulp sass && webpack",
     "run": "coffeee app.coffee"
   },
@@ -26,6 +26,7 @@
     "gulp-sass": "2.2.0",
     "jase": "1.2.0",
     "jquery": "2.2.3",
+    "lodash": "4.11.2",
     "mapbox": "1.0.0-beta",
     "mongoose": "4.4.12",
     "morgan": "1.7.0",
@@ -42,6 +43,7 @@
     "chai": "^3.5.0",
     "gulp-babel": "6.1.2",
     "mocha": "^2.4.5",
+    "supertest": "1.2.0",
     "webpack": "1.13.0"
   }
 }

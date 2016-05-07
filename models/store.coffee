@@ -57,8 +57,20 @@ storeSchema.pre "save", (done) ->
     else
       done()
 
-# Virtual Getters
+storeSchema.statics.publicAttributes = ->
+  [
+    "_id",
+    "name",
+    "address",
+    "phone",
+    "benefits",
+    "createdAt",
+    "hours",
+    "coordinates",
+    "myPlate"
+  ]
 
+# Virtual Getters
 storeSchema.virtual "humanCreated"
 .get ->
   _date = new Date(this.createdAt)

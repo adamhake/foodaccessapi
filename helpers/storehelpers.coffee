@@ -1,3 +1,7 @@
+_ = require "lodash"
+Store = require "../models/store"
+
+
 module.exports.requestToObject = (req, store = false) ->
   address =
     street: req.body.streetAddress
@@ -40,3 +44,11 @@ module.exports.requestToObject = (req, store = false) ->
       category: req.body.category
       public: if req.body.public then true else false
   return store
+
+module.exports.formatResponse = (data) ->
+    stores = []
+    data.forEach (store) ->
+      stores.push _.pick store, Store.publicAttributes()
+    response =
+      status: "success"
+      stores: stores
