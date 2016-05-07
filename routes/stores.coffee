@@ -9,7 +9,7 @@ mongoose = require 'mongoose'
 express  = require 'express'
 router   = express.Router()
 Store    = require '../models/store'
-helpers  = require '../helpers/storeHelpers'
+helpers  = require '../helpers/storehelpers'
 
 # GET /stores : Return all stores
 # -------------------------------
