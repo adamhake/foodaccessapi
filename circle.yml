@@ -1,5 +1,9 @@
 deployment:
   production:
-    branch: master
+    branch: production
     heroku:
       appname: food-access-api
+  staging:
+    branch: master
+    heroku:
+      appname: food-access-api-staging
