@@ -41,3 +41,5 @@ gulp.task "sass", ->
 # Watch for Sass file changes
 gulp.task "sass:watch", ->
   gulp.watch "./src/scss/**/*.scss", ["sass"]
+
+gulp.task "build", ["scripts", "sass"]
