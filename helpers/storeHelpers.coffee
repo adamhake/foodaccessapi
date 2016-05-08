@@ -46,8 +46,9 @@ module.exports.requestToObject = (req, store = false) ->
 
 module.exports.formatResponse = (data) ->
     stores = []
-    data.forEach (store) ->
-      stores.push _.pick store, Store.publicAttributes()
+    if data
+      data.forEach (store) ->
+        stores.push _.pick store, Store.publicAttributes()
     response =
       status: "success"
       stores: stores

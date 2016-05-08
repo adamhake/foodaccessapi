@@ -14,9 +14,14 @@ helpers  = require '../helpers/storeHelpers'
 # GET /stores : Return all stores
 # -------------------------------
 router.get '/', (req, res) ->
-  Store.find (err, stores) ->
-    res.send err if err
-    res.json helpers.formatResponse stores
+  if req.query.location
+    Store.findByLocation req.query.location, (err, stores) ->
+      res.send err if err
+      res.json helpers.formatResponse stores
+  else
+    Store.find (err, stores) ->
+      res.send err if err
+      res.json helpers.formatResponse stores
 
 # POST /stores : Create a Store and return it
 # -------------------------------------------

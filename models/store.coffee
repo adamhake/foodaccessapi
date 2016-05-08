@@ -14,9 +14,11 @@ storeSchema = mongoose.Schema
     city: String
     state: String
     zipcode: Number
-  coordinates:
-    lat: Number
-    lng: Number
+  location:
+    type:
+      type: String
+      default: "Point"
+    coordinates: [Number]
   phone: String
   benefits:
     freshOptions: Boolean
@@ -36,6 +38,10 @@ storeSchema = mongoose.Schema
       type: Date
       default: Date.now
 
+# Secondary Indexes
+storeSchema.index
+  location: '2dsphere'
+
 # categoryMap
 categoryMap =
   farmersMarket: "Farmer's Market"
@@ -51,11 +57,26 @@ storeSchema.pre "save", (done) ->
   addressString = "#{address.street}, #{address.city}, #{address.state} #{address.zipcode}"
   client.geocodeForward addressString, (err, res) ->
     if res and res.features
-      store.coordinates.lat = res.features[0].geometry.coordinates[1]
-      store.coordinates.lng = res.features[0].geometry.coordinates[0]
+      store.location.coordinates = res.features[0].geometry.coordinates
       done()
     else
       done()
+
+
+storeSchema.statics.findByLocation = (location, cb) ->
+  # Geocode location
+  Store = this
+  client.geocodeForward location, (err, res) ->
+    if res and res.features
+      query =
+        location:
+          $near:
+            $geometry:
+              type: "Point"
+              coordinates: res.features[0].geometry.coordinates
+            $maxDistance: 1609.34 # One mile in meters
+      Store.find query, (err, stores) ->
+        cb err, stores
 
 storeSchema.statics.publicAttributes = ->
   [
@@ -66,7 +87,7 @@ storeSchema.statics.publicAttributes = ->
     "benefits",
     "createdAt",
     "hours",
-    "coordinates",
+    "location",
     "myPlate"
   ]
 
