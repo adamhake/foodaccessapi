@@ -25,7 +25,7 @@ router.get '/login', (req, res) ->
 # POST /login : authenticate user
 # -------------------------------
 router.post '/login', passport.authenticate "login",
-  successRedirect: "/"
+  successRedirect: "/stores"
   failureRedirect: "/login"
   failureFlash: false
 
