@@ -32,7 +32,7 @@ gulp.task "scripts:watch", ->
 
 # Compile Sass
 gulp.task "sass", ->
-  gulp.src "./src/scss/src.scss"
+  gulp.src "./src/scss/app.scss"
   .pipe sourcemaps.init()
   .pipe sass().on 'error', sass.logError
   .pipe sourcemaps.write()

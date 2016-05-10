@@ -63,7 +63,6 @@ app.use '/api/v1/users', userRouter
 
 app.use '/', adminRouter
 
-
 app.listen process.env.PORT, ->
   console.log "Listening on port #{process.env.PORT}"
 

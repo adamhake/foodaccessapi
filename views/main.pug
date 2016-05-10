@@ -9,10 +9,11 @@ html
     script.
       try{Typekit.load({ async: true });}catch(e){}
   body
-    unless login
-      include header.pug
-    .content
-      block content
-    include footer.pug
-    script(src="/js/app.js")
-    script(src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js')
+    .page
+      unless login
+        include header.pug
+      .content
+        block content
+      include footer.pug
+      script(src="/js/app.js")
+      script(src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js')

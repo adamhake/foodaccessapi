@@ -44,7 +44,7 @@ module.exports.requestToObject = (req, store = false) ->
       public: if req.body.public then true else false
   return store
 
-module.exports.formatResponse = (data) ->
+module.exports.formatStoreResponse = (data) ->
     stores = []
     if data
       data.forEach (store) ->
@@ -52,3 +52,8 @@ module.exports.formatResponse = (data) ->
     response =
       status: "success"
       stores: stores
+
+module.exports.formatErrorResponse = (err, status, res) ->
+  res.status(status).json
+    status: "Error"
+    error: err

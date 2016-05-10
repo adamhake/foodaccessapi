@@ -67,7 +67,10 @@ storeSchema.statics.findByLocation = (location, cb) ->
   # Geocode location
   Store = this
   client.geocodeForward location, (err, res) ->
-    if res and res.features
+    if err
+      console.log "geocodeForward return err"
+      cb err, []
+    else if res and res.features[0]
       query =
         location:
           $near:
@@ -77,6 +80,11 @@ storeSchema.statics.findByLocation = (location, cb) ->
             $maxDistance: 1609.34 # One mile in meters
       Store.find query, (err, stores) ->
         cb err, stores
+    else
+      error = new Error()
+      error.message = "Could not find a location from the given search"
+      error.searchQuery = location
+      cb error
 
 storeSchema.statics.publicAttributes = ->
   [
