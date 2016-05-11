@@ -33,7 +33,7 @@ app.set 'view engine', 'pug'
 # --------------------------------------------------
 
 # Helmet
-app.use helmet()
+# app.use helmet()
 
 # Static file directory
 app.use express.static __dirname + "/dist"
