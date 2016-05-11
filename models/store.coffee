@@ -24,9 +24,11 @@ storeSchema = mongoose.Schema
     freshOptions: Boolean
     snap: Boolean
     wic: Boolean
+    doubleBucks: Boolean
   hours:
     days: String
     months: String
+    hours: String
   myPlate:
     dairy: Boolean
     fruit: Boolean
@@ -34,9 +36,14 @@ storeSchema = mongoose.Schema
     protein: Boolean
     veggie: Boolean
   public: Boolean
-  createdAt:
-      type: Date
-      default: Date.now
+  meals: String
+  surveyed: Boolean
+  created:
+    type: Date
+    default: Date.now
+  updated:
+    type: Date
+    default: Date.now
 
 # Secondary Indexes
 storeSchema.index
@@ -53,6 +60,9 @@ categoryMap =
 # Method: Geocode address
 storeSchema.pre "save", (done) ->
   store = this;
+  # update updated
+  store.updated = Date.now
+  # Geocode Address
   address = store.address
   addressString = "#{address.street}, #{address.city}, #{address.state} #{address.zipcode}"
   client.geocodeForward addressString, (err, res) ->
@@ -63,12 +73,12 @@ storeSchema.pre "save", (done) ->
       done()
 
 
-storeSchema.statics.findByLocation = (location, cb) ->
+storeSchema.statics.findByLocation = (location, bounds, cb) ->
   # Geocode location
   Store = this
+  bounds = if bounds then parseInt bounds else 1600
   client.geocodeForward location, (err, res) ->
     if err
-      console.log "geocodeForward return err"
       cb err, []
     else if res and res.features[0]
       query =
@@ -77,7 +87,7 @@ storeSchema.statics.findByLocation = (location, cb) ->
             $geometry:
               type: "Point"
               coordinates: res.features[0].geometry.coordinates
-            $maxDistance: 1609.34 # One mile in meters
+            $maxDistance: bounds
       Store.find query, (err, stores) ->
         cb err, stores
     else

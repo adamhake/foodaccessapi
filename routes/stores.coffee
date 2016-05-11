@@ -15,7 +15,8 @@ helpers  = require '../helpers/storeHelpers'
 # -------------------------------
 router.get '/', (req, res) ->
   if req.query.location
-    Store.findByLocation req.query.location, (err, stores) ->
+    bounds = req.query.bounds
+    Store.findByLocation req.query.location, bounds, (err, stores) ->
       if err
         helpers.formatErrorResponse err, 404, res
       else

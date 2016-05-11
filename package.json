@@ -4,8 +4,8 @@
   "description": "API for RDH Health Food Store Database",
   "main": "app.coffee",
   "scripts": {
-    "test": "mocha --timeout 5000 --compilers coffee:coffee-script/register",
-    "install": "gulp build",
+    "test": "mocha --compilers coffee:coffee-script/register",
+    "postinstall": "gulp build",
     "start": "coffee app.coffee"
   },
   "author": "CodeForRVA",

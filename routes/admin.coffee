@@ -13,9 +13,34 @@ storeHelpers = require '../helpers/storeHelpers'
 authHelpers  = require '../helpers/authenticationHelpers'
 User         = require '../models/user'
 
+
+# fs  = require 'fs'
+# router.get "/import", (req, res) ->
+#   fs.readFile __dirname + '/rawData.json', (err, data) ->
+#     if err then console.log err
+#     if data
+#       _stores = JSON.parse(data)
+#       Store.collection.insert _stores, (err, stores) ->
+#         if err then console.log err
+#         res.redirect "/"
+
+
+router.get "/resave", (req, res) ->
+  Store.find {}
+  .sort
+    name: 1
+  .exec (err, stores) ->
+    for store, index in stores
+      if index > 200
+        store.save (err, store) ->
+          return true
+    res.send "done!"
+
+
 # -----------------------------------------------
 # Store Routes
 # -----------------------------------------------
+
 
 # GET /stores : Return all stores
 # -------------------------------
