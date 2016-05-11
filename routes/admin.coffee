@@ -25,16 +25,16 @@ User         = require '../models/user'
 #         res.redirect "/"
 
 
-router.get "/resave", (req, res) ->
-  Store.find {}
-  .sort
-    name: 1
-  .exec (err, stores) ->
-    for store, index in stores
-      if index > 200
-        store.save (err, store) ->
-          return true
-    res.send "done!"
+# router.get "/resave", (req, res) ->
+#   Store.find {}
+#   .sort
+#     name: 1
+#   .exec (err, stores) ->
+#     for store, index in stores
+#       if index > 200
+#         store.save (err, store) ->
+#           return true
+#     res.send "done!"
 
 
 # -----------------------------------------------
