@@ -10,9 +10,12 @@ express  = require 'express'
 router   = express.Router()
 Store    = require '../models/store'
 helpers  = require '../helpers/storeHelpers'
+cors     = require 'cors';
 
 # GET /stores : Return all stores
 # -------------------------------
+router.use cors()
+
 router.get '/', (req, res) ->
   if req.query.location
     bounds = req.query.bounds
