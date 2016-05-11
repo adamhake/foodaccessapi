@@ -5,10 +5,14 @@
 #
 # -----------------------------------------------
 
-passport = require 'passport'
-express  = require 'express'
-router   = express.Router()
-User     = require '../models/user'
+csrf        = require 'csurf'
+express     = require 'express'
+passport    = require 'passport'
+router      = express.Router()
+User        = require '../models/user'
+
+csrfProtect = csrf
+  cookie: true
 
 # Add user to local variables if present
 # --------------------------------------
@@ -18,16 +22,18 @@ router.use (req, res, next) ->
 
 # GET /login : Auth form
 # -------------------------------
-router.get '/login', (req, res) ->
+router.get '/login', csrfProtect, (req, res) ->
   res.render "login",
     login: true
+    csrfToken: req.csrfToken()
+    message: req.flash('error')
 
 # POST /login : authenticate user
 # -------------------------------
-router.post '/login', passport.authenticate "login",
+router.post '/login', csrfProtect, passport.authenticate "login",
   successRedirect: "/stores"
   failureRedirect: "/login"
-  failureFlash: false
+  failureFlash: true
 
 # GET /logout : logout user
 # -------------------------------

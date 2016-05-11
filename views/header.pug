@@ -5,4 +5,4 @@ header
       a(href="/stores/new" class= menu == "new" ? "header-link active" : "header-link") New Store
     .header-section
       a(href= user ? "/users/" + user._id : "#" class= menu == "settings" ? "header-link active" : "header-link") User Settings
-      a(href="/" class="header-link") Logout
+      a(href="/logout" class="header-link") Logout

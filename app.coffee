@@ -7,7 +7,9 @@ mongoose     = require 'mongoose'
 morgan       = require 'morgan'
 session      = require 'express-session'
 passport     = require 'passport'
-authHelpers = require './helpers/authenticationHelpers'
+authHelpers  = require './helpers/authenticationHelpers'
+flash        = require 'connect-flash'
+helmet       = require 'helmet'
 
 authRouter    = require './routes/authentication'
 storesRouter  = require './routes/stores'
@@ -29,6 +31,9 @@ app.set 'view engine', 'pug'
 
 # Middleware
 # --------------------------------------------------
+
+# Helmet
+app.use helmet()
 
 # Static file directory
 app.use express.static __dirname + "/dist"
@@ -53,6 +58,8 @@ app.use session
 # passport
 app.use passport.initialize()
 app.use passport.session()
+
+app.use flash()
 
 # Routes
 app.use '/api/v1/stores', storesRouter

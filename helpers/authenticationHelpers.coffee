@@ -18,7 +18,7 @@ module.exports.init = () ->
     , (err, user) ->
       done err if err
       if !user then return done null, false,
-        message: "No user found with than username"
+        message: "No user found with that username"
       user.checkPassword password, (err, isMatch) ->
         done err if err
         if isMatch

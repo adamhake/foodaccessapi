@@ -32,6 +32,9 @@ p{
   &.-white{
     color: #fff;
   }
+  &.-error{
+    color: color(error);
+  }
 }
 span{color: color(text);}
 main,

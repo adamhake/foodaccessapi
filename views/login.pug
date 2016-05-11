@@ -1,15 +1,20 @@
 extends ./main.pug
 
 block content
-  div(class="wrapper -very-thin")
-    h1(class="title -centered") Food Access Database
-    p Please log in to continue
+  div(class="wrapper -very-thin -s-top")
+    h1(class="title -centered -no-space-top") Food Access Database
+    if message.length > 0
+      div(class="error")
+        p(class="-white")= message
+    else
+      p Please log in to continue
     .section
       form(action="/login", method="POST" class="-very-thin")
         fiedset(class="form-element")
           legend Username
-          input(name="username" placeholder="Username", type="text")
+          input(name="username" placeholder="Username" type="text" required)
           legend Password
-          input(name="password", placeholder="Password", type="password")
+          input(name="password" placeholder="Password" type="password" required)
+          input(type="hidden" name="_csrf" value=csrfToken)
         fieldset(class="form-element")
           button(type="submit") Login
