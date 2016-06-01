@@ -1,0 +1,14 @@
+.messages{
+  padding: 0.75rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  &.-error{
+    text-transform: uppercase;
+    background-color: color(error);
+    font-size: 0.85rem;
+  }
+  &.-info{
+    background-color: color(info);
+    font-size: 0.95rem;
+  }
+}

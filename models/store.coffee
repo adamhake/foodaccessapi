@@ -51,9 +51,10 @@ storeSchema.index
 
 # categoryMap
 categoryMap =
-  farmersMarket: "Farmer's Market"
-  fullScale: "Full Scale"
-  healthyCornerStore: "Healthy Corner Store"
+  farmers_market: "Farmer's Market"
+  full_scale: "Full Scale"
+  healthy_corner_store: "Healthy Corner Store"
+  summer_feeding_site: "Summer Feeding Site"
   other: "Other"
 
 
@@ -103,10 +104,11 @@ storeSchema.statics.publicAttributes = ->
     "address",
     "phone",
     "benefits",
-    "createdAt",
+    "updated",
     "hours",
     "location",
-    "myPlate"
+    "myPlate",
+    "category",
   ]
 
 # Virtual Getters

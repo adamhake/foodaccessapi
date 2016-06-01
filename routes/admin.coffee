@@ -1,9 +1,9 @@
-# -----------------------------------------------
+# ------------------------------------------------------------------------------
 #
 # Router: Admin
 # - Handles admin interface
 #
-# -----------------------------------------------
+# ------------------------------------------------------------------------------
 
 mongoose     = require 'mongoose'
 express      = require 'express'
@@ -16,7 +16,7 @@ User         = require '../models/user'
 
 # fs  = require 'fs'
 # router.get "/import", (req, res) ->
-#   fs.readFile __dirname + '/rawData.json', (err, data) ->
+#   fs.readFile __dirname + '/storesImport.json', (err, data) ->
 #     if err then console.log err
 #     if data
 #       _stores = JSON.parse(data)
@@ -36,14 +36,18 @@ User         = require '../models/user'
 #           return true
 #     res.send "done!"
 
+# router.get "/reset", (req, res) ->
+#   Store.remove {}, ->
+#     res.redirect "/stores"
 
-# -----------------------------------------------
+
+# ------------------------------------------------------------------------------
 # Store Routes
-# -----------------------------------------------
+# ------------------------------------------------------------------------------
 
 
 # GET /stores : Return all stores
-# -------------------------------
+# ------------------------------------------------------------------------------
 router.get '/stores', authHelpers.isAuthenticated, (req, res) ->
   Store.find {}
   .sort
@@ -55,23 +59,25 @@ router.get '/stores', authHelpers.isAuthenticated, (req, res) ->
       user: req.user
       menu: "stores"
 
+
 # GET /stores/new : New store form
-# --------------------------------
+# ------------------------------------------------------------------------------
 router.get '/stores/new', authHelpers.isAuthenticated, (req, res) ->
   res.render 'admin/new',
     user: req.user
     menu: "new"
 
+
 # POST /stores/new : Create new store
-# -----------------------------------
+# ------------------------------------------------------------------------------
 router.post '/stores/new', authHelpers.isAuthenticated, (req, res) ->
-  console.log req.body
   store = new Store storeHelpers.requestToObject req
   store.save (err, store) ->
     res.redirect '/stores'
 
+
 # GET /stores/:store_id : Show store detail
-# -----------------------------------------
+# ------------------------------------------------------------------------------
 router.get '/stores/:store_id', authHelpers.isAuthenticated, (req, res) ->
   Store.findById req.params.store_id, (err, store) ->
     res.status(500).send err if err
@@ -79,8 +85,9 @@ router.get '/stores/:store_id', authHelpers.isAuthenticated, (req, res) ->
       store: store
       user: req.user
 
+
 # GET /stores/:store_id/edit : Store edit form
-# --------------------------------------------
+# ------------------------------------------------------------------------------
 router.get '/stores/:store_id/edit', authHelpers.isAuthenticated, (req, res) ->
   Store.findById req.params.store_id, (err, store) ->
     res.status(500).send err if err
@@ -89,8 +96,9 @@ router.get '/stores/:store_id/edit', authHelpers.isAuthenticated, (req, res) ->
       referrer: req.get "Referrer"
       user: req.user
 
+
 # POST /stores/:store_id/edit : Update Stores
-# --------------------------------------------
+# ------------------------------------------------------------------------------
 router.post '/stores/:store_id/edit', authHelpers.isAuthenticated, (req, res) ->
   console.log req.body
   Store.findById req.params.store_id, (err, store) ->
@@ -100,8 +108,9 @@ router.post '/stores/:store_id/edit', authHelpers.isAuthenticated, (req, res) ->
       res.status(400).send err if err
       res.redirect "/stores"
 
+
 # GET /stores/:store_id/delte : Delete store
-# ------------------------------------------
+# ------------------------------------------------------------------------------
 router.get '/stores/:store_id/delete', authHelpers.isAuthenticated, (req, res) ->
   Store.remove
     _id: req.params.store_id
@@ -109,12 +118,14 @@ router.get '/stores/:store_id/delete', authHelpers.isAuthenticated, (req, res) -
     res.status(500).send err if err
     res.redirect "/stores"
 
-# -----------------------------------------------
+
+# ------------------------------------------------------------------------------
 # User Routes
-# -----------------------------------------------
+# ------------------------------------------------------------------------------
+
 
 # GET /users/:user_id : User settings
-# ------------------------------------------
+# ------------------------------------------------------------------------------
 router.get "/users/:user_id", authHelpers.isAuthenticated, (req, res) ->
   User.findById req.params.user_id, (err, user) ->
     if err
@@ -127,6 +138,8 @@ router.get "/users/:user_id", authHelpers.isAuthenticated, (req, res) ->
     else
       res.status(401).send "Not Authorized"
 
+# POST /users/:user_id : Process user settings form
+# ------------------------------------------------------------------------------
 router.post "/users/:user_id", authHelpers.isAuthenticated, (req, res) ->
   User.findById req.params.user_id, (err, user) ->
 

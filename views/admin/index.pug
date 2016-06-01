@@ -15,7 +15,7 @@ block content
         tr
           td
             a(href="/stores/" + store._id)= store.name
-          td Category
+          td= store.humanCategory
           td= store.humanCreated
           td
             a(href="/stores/" + store._id + "/edit") Edit
