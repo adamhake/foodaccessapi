@@ -13,8 +13,16 @@ $(document).ready( ()=> {
 
 
 const StoreList = React.createClass({
+  allStores: [],
+  allStoresCount: 0,
   getInitialState() {
-    return {stores: [], allStores: []};
+    return {
+      stores: [],
+      sorted: {
+        type: "name",
+        dir: "ASC"
+      }
+    };
   },
   componentDidMount(){
     $.ajax({
@@ -22,21 +30,62 @@ const StoreList = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(data) {
-        this.setState({stores: data.stores, allStores: data.stores});
+        let stores = _.sortBy(data.stores, store => {
+          return store.name;
+        });
+        this.setState({stores: stores});
+        this.allStores = stores;
+        this.allStoresCount = stores.length;
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     })
   },
+  componentDidUpdate(){
+    // reset sort classes
+    $('.sortable').removeClass('-sorted -asc -desc');
+    let currFilter = this.state.sorted;
+    let label = _.startCase(currFilter.type);
+    let dir = _.lowerCase(currFilter.dir);
+    $(`.sortable:contains('${label}')`).addClass(`-sorted -${dir}`);
+  },
+  handleTableSort(type){
+    console.log(type);
+    let sortedStores = [];
+    let filterState = this.setFilterState(type);
+    switch (type) {
+      case 'name':
+        sortedStores = _.sortBy(this.state.stores, store => {
+          return store.name;
+        });
+
+        break;
+      case 'category':
+        sortedStores = _.sortBy(this.state.stores, store => {
+          return store.category;
+        });
+        break;
+      case 'streetAddress':
+        sortedStores = _.sortBy(this.state.stores, store => {
+          return store.address.street;
+        });
+        break;
+      default:
+        return;
+    }
+    if(filterState.dir == 'DESC'){
+      _.reverse(sortedStores);
+    }
+    this.setState({stores: sortedStores, sorted: filterState});
+  },
   handleSearchSubmit(term){
-    let totalStores = this.state.allStores.length;
     if(term.length < 3){
-      if(this.state.stores.length < totalStores){
-        this.setState({stores: this.state.allStores});
+      if(this.state.stores.length < this.allStoresCount){
+        this.setState({stores: this.allStores});
       }
     } else{
-      var stores = _.filter(this.state.allStores, store =>{
+      var stores = _.filter(this.allStores, store => {
         var name = store.name.trim();
         name = _.replace(name, " ", "");
         name = name.toLowerCase();
@@ -45,31 +94,49 @@ const StoreList = React.createClass({
       this.setState({stores: stores});
     }
   },
+  setFilterState(type){
+    if(this.state.sorted == false || this.state.sorted.type !== type){
+      return {
+        type: type,
+        dir: "ASC"
+      };
+    } else {
+      return{
+        type: type,
+        dir: this.state.sorted.dir == "ASC" ? "DESC" : "ASC"
+      }
+    }
+  },
   render(){
     return(<div className="store-list">
       <TableSearchBox onSearchSubmit={this.handleSearchSubmit}/>
-      <TableList stores={this.state.stores} />
+      <TableList onSort={this.handleTableSort} stores={this.state.stores} />
     </div>);
   }
 });
 
 const TableList = React.createClass({
+  handleOnFilter(e){
+    let target = _.camelCase($(e.target).text());
+    this.props.onSort(target);
+  },
   render(){
     var storeNodes = this.props.stores.map(store => {
       return(<TableRow
         key={store._id}
         id={store._id}
         name={store.name}
-        category={store.category}
+        streetAddress={store.address.street}
         updated={store.updated}
+        category={store.category}
       />);
     });
     return(<table className="store-list--stores">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Last Updated</th>
+          <th className="sortable -sorted -asc" onClick={this.handleOnFilter}>Name</th>
+          <th className="sortable" onClick={this.handleOnFilter}>Street Address</th>
+          <th className="sortable" onClick={this.handleOnFilter}>Category</th>
           <th></th>
           <th></th>
         </tr>
@@ -94,8 +161,8 @@ const TableRow = React.createClass({
       <td>
         <a href={`/stores/${this.props.id}`}>{this.props.name}</a>
       </td>
+      <td>{this.props.streetAddress}</td>
       <td>{this.formatCategory()}</td>
-      <td>{this.formatUpdated()}</td>
       <td>
         <a href={`/stores/${this.props.id}/edit`}>Edit</a>
       </td>

@@ -19,6 +19,25 @@
     }
   }
 
+.sortable{
+  transition: all 0.35s ease;
+  cursor: pointer;
+  &.-sorted{
+    color: color(primary);
+    &:after{
+      font-family: 'FontAwesome';
+      padding-left: 10px;
+      font-size: 0.85rem;
+    }
+    &.-asc:after{
+      content: "\f077";
+    }
+    &.-desc:after{
+      content: "\f078";
+    }
+  }
+}
+
   tbody td{
     padding: 0.65rem;
 
