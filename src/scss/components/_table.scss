@@ -1,7 +1,12 @@
 .store-list{
   width: 100%;
   max-width: 1200px;
-  margin: 6rem auto;
+  margin: 5rem auto;
+}
+
+.store-list--stores{
+  width: 100%;
+  margin: 1rem auto 0 auto;
   border-spacing: 0;
   color: color(text);
   font-family: font(sans);

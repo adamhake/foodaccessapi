@@ -23,19 +23,20 @@ User         = require '../models/user'
 #       Store.collection.insert _stores, (err, stores) ->
 #         if err then console.log err
 #         res.redirect "/"
-
-
+#
+#
 # router.get "/resave", (req, res) ->
 #   Store.find {}
-#   .sort
-#     name: 1
 #   .exec (err, stores) ->
+#     savedCount = 0
 #     for store, index in stores
-#       if index > 200
+#       if store.location.coordinates.length == 0
+#         savedCount++
 #         store.save (err, store) ->
 #           return true
-#     res.send "done!"
-
+#     console.log("Total Saved: " + savedCount)
+#     res.redirect "/stores"
+#
 # router.get "/reset", (req, res) ->
 #   Store.remove {}, ->
 #     res.redirect "/stores"

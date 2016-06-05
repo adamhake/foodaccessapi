@@ -15,6 +15,7 @@ authRouter    = require './routes/authentication'
 storesRouter  = require './routes/stores'
 userRouter    = require './routes/users'
 adminRouter   = require './routes/admin'
+pagesRouter   = require './routes/pages'
 
 # Database
 # --------------------------------------------------
@@ -69,6 +70,8 @@ app.use '/', authRouter
 app.use '/api/v1/users', userRouter
 
 app.use '/', adminRouter
+
+app.use '/', pagesRouter
 
 app.listen process.env.PORT, ->
   console.log "Listening on port #{process.env.PORT}"

@@ -30,9 +30,9 @@ form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new
         | Select Category
       input(type="hidden" name="category" value= store ? store.category: "healthyCornerStore")
       ul(class="select-form-element-options -hidden")
-        li(class="select-form-element-option" data-value="farmersMarket") Farmer's Market
-        li(class="select-form-element-option" data-value="fullScale") Full Scale
-        li(class="select-form-element-option" data-value="healthyCornerStore") Healthy Corner Store
+        li(class="select-form-element-option" data-value="farmers_market") Farmer's Market
+        li(class="select-form-element-option" data-value="full_scale") Full Scale
+        li(class="select-form-element-option" data-value="healthy_corner_store") Healthy Corner Store
         li(class="select-form-element-option" data-value="other") Other
   fieldset(class="form-element")
     legend

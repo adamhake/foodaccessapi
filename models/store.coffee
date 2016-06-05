@@ -13,7 +13,7 @@ storeSchema = mongoose.Schema
     streetAux: String
     city: String
     state: String
-    zipcode: Number
+    zipcode: String
   location:
     type:
       type: String
@@ -67,6 +67,8 @@ storeSchema.pre "save", (done) ->
   address = store.address
   addressString = "#{address.street}, #{address.city}, #{address.state} #{address.zipcode}"
   client.geocodeForward addressString, (err, res) ->
+    if err
+      console.log err
     if res and res.features
       store.location.coordinates = res.features[0].geometry.coordinates
       done()
@@ -114,7 +116,12 @@ storeSchema.statics.publicAttributes = ->
 # Virtual Getters
 storeSchema.virtual "humanCreated"
 .get ->
-  _date = new Date(this.createdAt)
+  _date = new Date(this.created)
+  return _date.toLocaleDateString()
+
+storeSchema.virtual "humanUpdated"
+.get ->
+  _date = new Date(this.updated)
   return _date.toLocaleDateString()
 
 storeSchema.virtual "humanPhone"

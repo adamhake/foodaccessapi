@@ -1,23 +1,24 @@
 extends ../main.pug
 
 block content
-  table(class="store-list")
-    thead
-      tr
-        th Name
-        th Category
-        th Created
-        th(data-dynatable-no-sort="true")
-        th(data-dynatable-no-sort="true")
-    tbody
-      each store in stores
-        - var id = store._id
-        tr
-          td
-            a(href="/stores/" + store._id)= store.name
-          td= store.humanCategory
-          td= store.humanCreated
-          td
-            a(href="/stores/" + store._id + "/edit") Edit
-          td
-            a(href="/stores/" + store._id + "/delete") Delete
+  #storeList
+  //- table(class="store-list")
+  //-   thead
+  //-     tr
+  //-       th Name
+  //-       th Category
+  //-       th Last Updated
+  //-       th(data-dynatable-no-sort="true")
+  //-       th(data-dynatable-no-sort="true")
+  //-   tbody
+  //-     each store in stores
+  //-       - var id = store._id
+  //-       tr
+  //-         td
+  //-           a(href="/stores/" + store._id)= store.name
+  //-         td= store.humanCategory
+  //-         td= store.humanUpdated
+  //-         td
+  //-           a(href="/stores/" + store._id + "/edit") Edit
+  //-         td
+  //-           a(href="/stores/" + store._id + "/delete") Delete

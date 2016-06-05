@@ -21,7 +21,8 @@ ol,
 ul {
     margin: 0;
     padding: 0;
-    text-rendering: optimizeLegibility
+    text-rendering: optimizeLegibility;
+    color: color(text);
 }
 p{
   line-height: 1.5;

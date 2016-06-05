@@ -1,12 +1,13 @@
-browserify  = require "browserify"
-buffer      = require "vinyl-buffer"
-coffeeify   = require "coffeeify"
-gulp        = require "gulp"
-gutil       = require "gulp-util"
-rename      = require "gulp-rename"
-source      = require "vinyl-source-stream"
-sourcemaps  = require "gulp-sourcemaps"
-sass        = require "gulp-sass"
+browserify     = require "browserify"
+buffer         = require "vinyl-buffer"
+coffeeify      = require "coffeeify"
+gulp           = require "gulp"
+gutil          = require "gulp-util"
+rename         = require "gulp-rename"
+source         = require "vinyl-source-stream"
+sourcemaps     = require "gulp-sourcemaps"
+sass           = require "gulp-sass"
+
 
 # Complile Coffee Script
 gulp.task "scripts", ->
@@ -14,6 +15,7 @@ gulp.task "scripts", ->
     entries: "./src/js/main.coffee"
     debug: true
 
+  b.transform "coffee-reactify"
   b.transform 'coffeeify'
   .bundle()
   .pipe source './src/js/app.js'

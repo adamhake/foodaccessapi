@@ -1,0 +1,13 @@
+form(class="form" action="/users/new" method="POST")
+  fieldset(class="form-element")
+    legend Username
+    input(required type="text" name="userame" placeholder="username")
+    legend Email
+    input(required type="email" placeholder="email")
+    legend Password
+    input(type="password", value= "" placeholder="Password")
+    legend Confirm Password
+    input(type="password", value= "" placeholder="Password")
+  fieldset(class="form-element")
+    button(type="submit") Create User
+    a(href=referrer ? referrer : "/stores") Cancel
