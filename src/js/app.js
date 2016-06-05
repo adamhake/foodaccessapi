@@ -82,7 +82,7 @@ const StoreList = React.createClass({
   handleSearchSubmit(term){
     if(term.length < 3){
       if(this.state.stores.length < this.allStoresCount){
-        this.setState({stores: this.allStores});
+        this.setState({stores: this.allStores, sorted:{type: "name", dir: "asc"}});
       }
     } else{
       var stores = _.filter(this.allStores, store => {
