@@ -3,6 +3,8 @@ deployment:
     branch: production
     heroku:
       appname: food-access-api
+    commands:
+      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
   staging:
     branch: master
     heroku:
