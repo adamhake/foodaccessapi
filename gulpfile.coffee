@@ -44,4 +44,4 @@ gulp.task "sass", ->
 gulp.task "sass:watch", ->
   gulp.watch "./src/scss/**/*.scss", ["sass"]
 
-gulp.task "build", ["scripts", "sass"]
+gulp.task "build", ["sass"]
