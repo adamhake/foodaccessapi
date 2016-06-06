@@ -1,8 +1,4 @@
 deployment:
-  production:
-    branch: production
-    heroku:
-      appname: food-access-api
   staging:
     branch: master
     heroku:
