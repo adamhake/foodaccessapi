@@ -111,6 +111,7 @@ storeSchema.statics.publicAttributes = ->
     "location",
     "myPlate",
     "category",
+    "meals"
   ]
 
 # Virtual Getters

@@ -33,6 +33,7 @@ module.exports.requestToObject = (req, store = false) ->
     store.phone = req.body.phone
     store.category = req.body.category
     store.public = if req.body.public then true else false
+    store.meals = req.body.meals
   else
     store =
       address: address
@@ -43,6 +44,7 @@ module.exports.requestToObject = (req, store = false) ->
       phone: req.body.phone
       category: req.body.category
       public: if req.body.public then true else false
+      meals: req.body.meals
       location:
         type: "Point"
         coordinates: [0,0]

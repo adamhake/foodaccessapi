@@ -26,9 +26,9 @@ form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new
       | Store Category
     div(class="select-form-element")
       i(class="fa fa-caret-down")
-      p(class="select-form-element-selection")
+      p(class="select-form-element-selection") Other
         | Select Category
-      input(type="hidden" name="category" value= store ? store.category: "healthyCornerStore")
+      input(type="hidden" name="category" value= store ? store.category: "other")
       ul(class="select-form-element-options -hidden")
         li(class="select-form-element-option" data-value="farmers_market") Farmer's Market
         li(class="select-form-element-option" data-value="full_scale") Full Scale
@@ -62,6 +62,9 @@ form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new
     input(class="-hidden" type="checkbox" name="myPlate" value="myPlateGrain" checked= store ? store.myPlate.grain : false)
     input(class="-hidden" type="checkbox" name="myPlate" value="myPlateVeggie" checked= store ? store.myPlate.veggie : false)
     input(class="-hidden" type="checkbox" name="myPlate" value="myPlateFruit" checked= store ? store.myPlate.fruit : false)
+  fieldset(class="form-element")
+    legend Available Meals
+    input(type="text" name="meals" placeholder="Available Meals")
   fieldset(class="form-element")
     legend
       i(class="fa fa-clock-o icon -inline")
