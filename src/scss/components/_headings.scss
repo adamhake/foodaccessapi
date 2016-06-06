@@ -1,38 +1,36 @@
-.heading{
+.heading {
   font-weight: 600;
 
-  &.centered{
+  &.centered {
     text-align: center;
   }
 
-  &.bold{
+  &.bold {
     font-weight: 700;
   }
 
 }
 
-.title{
+.title {
   font-family: font(serif);
   margin: 2rem 0;
   color: color(text);
 
-  &.-with-subtitle{
+  &.-with-subtitle {
     margin-bottom: 0.5rem;
   }
 
-  &.-no-space-top{
+  &.-no-space-top {
     margin-top: 0;
   }
 }
 
-.subheading{
+.subheading {
   color: color(text);
   text-transform: uppercase;
   font-family: font(serif);
   font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-  &.-content{
-    margin-bottom: 0;
-  }
+  font-size: 0.8rem;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: 1px;
 }

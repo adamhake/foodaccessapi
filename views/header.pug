@@ -4,7 +4,9 @@ header
       a(href="/stores" class= menu == "stores" ? "header-link active" : "header-link") All Stores
       a(href="/stores/new" class= menu == "new" ? "header-link active" : "header-link") New Store
     .header-section
-      a(href= user ? "/users/" + user._id : "#" class= menu == "settings" ? "header-link active" : "header-link") User Settings
+      a(href= user ? "/users/" + user._id + "/edit" : "#" class= menu == "settings" ? "header-link active" : "header-link") User Settings
+      if user && user._id == "57102ddd730427f12adfc6d0"
+        a(href="/users" class="header-link") All Users
       if user
         a(href="/logout" class="header-link") Logout
       else

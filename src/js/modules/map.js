@@ -5,7 +5,6 @@ class Map {
     this.initMap()
   }
   initMap() {
-    console.log("initMap");
     if ($("#map").length){
       L.mapbox.accessToken = 'pk.eyJ1IjoiYWRhbWhha2UiLCJhIjoiY2lmZ3lrZWZoYW5lbXN5bHgzMWNmcG94diJ9.4Cbq9ye_ouTeIWvgqZj70g';
       let map = L.mapbox.map('map', 'mapbox.streets');

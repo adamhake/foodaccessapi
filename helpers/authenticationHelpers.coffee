@@ -36,3 +36,20 @@ module.exports.isAuthenticated = (req, res, next) ->
     next()
   else
     res.redirect '/login'
+
+module.exports.validateUserForm = (req, res, next) ->
+  if req.body.confirmPassword and req.body.confirmPassword != req.body.password
+    req.flash 'error', 'Passwords do not match'
+    res.redirect "/users/#{req.user._id}/edit?username=#{req.body.username}&email=#{req.body.email}"
+  # Validate User Name
+  else if req.body.username and req.user.username != req.body.username
+    User.findOne
+      username: req.body.username
+    , (err, user) ->
+      if user
+        req.flash 'error', 'That username already exists'
+        res.redirect "/users/#{req.params.user_id}/edit"
+      else
+        next()
+  else
+    next()

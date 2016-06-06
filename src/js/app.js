@@ -4,11 +4,13 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import _ from "lodash";
 import Map from "./modules/map";
-import StoreForm from "./modules/storeForm"
+import StoreForm from "./modules/storeForm";
+import Flash from "./modules/flash";
 
 $(document).ready( ()=> {
   new Map();
   new StoreForm();
+  new Flash();
 });
 
 
@@ -166,7 +168,9 @@ const TableRow = React.createClass({
       <td>
         <a href={`/stores/${this.props.id}/edit`}>Edit</a>
       </td>
-      <td>Delete</td>
+      <td>
+        <a href={`/stores/${this.props.id}/delete`}>Delete</a>
+      </td>
     </tr>);
   }
 });

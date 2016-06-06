@@ -40,9 +40,9 @@ form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new
       | Benefits
 
     div(class="multi-select-group")
-      span(class="mult-select-option" data-value="wic") WIC
-      span(class="mult-select-option" data-value="snap") SNAP
-      span(class="mult-select-option" data-value="freshOptions") Fresh Options
+      span(class="multi-select-option" data-value="wic") WIC
+      span(class="multi-select-option" data-value="snap") SNAP
+      span(class="multi-select-option" data-value="freshOptions") Fresh Options
     input(class="-hidden" type="checkbox" name="benefits" value="wic" checked= store ? store.benefits.wic : false)
     input(class="-hidden" type="checkbox" name="benefits" value="snap" checked= store ? store.benefits.snap : false)
     input(class="-hidden" type="checkbox" name="benefits" value="freshOptions" checked= store ? store.benefits.freshOptions : false)
@@ -52,11 +52,11 @@ form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new
       | My Plate Offerings
 
     div(class="multi-select-group")
-      span(class="mult-select-option" data-value="myPlateDairy") Dairy
-      span(class="mult-select-option" data-value="myPlateProtein") Proteins
-      span(class="mult-select-option" data-value="myPlateGrain") Grains
-      span(class="mult-select-option" data-value="myPlateVeggie") Vegetables
-      span(class="mult-select-option" data-value="myPlateFruit") Fruits
+      span(class="multi-select-option" data-value="myPlateDairy") Dairy
+      span(class="multi-select-option" data-value="myPlateProtein") Proteins
+      span(class="multi-select-option" data-value="myPlateGrain") Grains
+      span(class="multi-select-option" data-value="myPlateVeggie") Vegetables
+      span(class="multi-select-option" data-value="myPlateFruit") Fruits
     input(class="-hidden" type="checkbox" name="myPlate" value="myPlateDairy" checked= store ? store.myPlate.dairy : false)
     input(class="-hidden" type="checkbox" name="myPlate" value="myPlateProtein" checked= store ? store.myPlate.protein : false)
     input(class="-hidden" type="checkbox" name="myPlate" value="myPlateGrain" checked= store ? store.myPlate.grain : false)
@@ -66,6 +66,7 @@ form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new
     legend
       i(class="fa fa-clock-o icon -inline")
       | Hours
+    input(type="text" name="hours" placeholder="Hours" value= store ? store.hours.hours : "")
     input(type="text" name="hoursDays" placeholder="Days Open" value= store ? store.hours.days : "")
     input(type="text" name="hoursMonths" placeholder="Months Open" value= store ? store.hours.months : "")
   fieldset(class="form-element")
@@ -73,7 +74,7 @@ form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new
       i(class="fa fa-lock icon -inline")
       | Status
     div(class="multi-select-group")
-      span(class="mult-select-option" data-value="public") Public
+      span(class="multi-select-option" data-value="public") Public
     input(class="-hidden" type="checkbox" name="public" value="public" checked= store ? store.public : true)
   fieldset(class="form-element")
     button(type="submit") Save

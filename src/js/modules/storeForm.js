@@ -8,7 +8,6 @@ class StoreForm {
   }
 
   initForm(){
-    console.log("initForm");
     //Category Defaults
     $('.select-form-element').hover( () => {
       $('.select-form-element-options').removeClass('-hidden');
@@ -21,7 +20,7 @@ class StoreForm {
     $('.select-form-element-selection').text(defaultText);
 
     // Multi Group Select Defaults
-    $(".mult-select-option").each( (i, el) =>{
+    $(".multi-select-option").each( (i, el) =>{
       let value = $(el).attr('data-value');
       if($(`input[value=${value}]`).attr("checked") == "checked") {
         $(el).addClass("-active")
@@ -37,14 +36,14 @@ class StoreForm {
       $('input[name="category"]').val(value);
       $('.select-form-element-options').addClass('-hidden');
     });
-    $('.mult-select-option:not(".-display")').click(function(){
+    $('.multi-select-option:not(".-display")').click(function(){
       let value = $(this).attr('data-value');
       if($(this).hasClass('-active')){
         $(this).removeClass('-active');
-        $("input[value=#{value}]").removeAttr('checked');
+        $(`input[value=${value}]`).removeAttr('checked');
       } else {
         $(this).addClass('-active');
-        $("input[value=#{value}]").attr('checked', 'checked');
+        $(`input[value=${value}]`).attr('checked', 'checked');
       }
     });
   }

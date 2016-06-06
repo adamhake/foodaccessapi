@@ -58,7 +58,10 @@ router.get '/stores', authHelpers.isAuthenticated, (req, res) ->
     res.render "admin/index",
       stores: stores
       user: req.user
-      menu: "stores"
+      menu: "stores",
+      messages:
+        info: req.flash "info"
+        error: req.flash "error"
 
 
 # GET /stores/new : New store form
@@ -72,9 +75,14 @@ router.get '/stores/new', authHelpers.isAuthenticated, (req, res) ->
 # POST /stores/new : Create new store
 # ------------------------------------------------------------------------------
 router.post '/stores/new', authHelpers.isAuthenticated, (req, res) ->
+  console.log req.body
   store = new Store storeHelpers.requestToObject req
   store.save (err, store) ->
-    res.redirect '/stores'
+    if err
+      res.status(500).send err
+    else
+      req.flash "info", "Store successfully created"
+      res.redirect '/stores'
 
 
 # GET /stores/:store_id : Show store detail
@@ -91,22 +99,24 @@ router.get '/stores/:store_id', authHelpers.isAuthenticated, (req, res) ->
 # ------------------------------------------------------------------------------
 router.get '/stores/:store_id/edit', authHelpers.isAuthenticated, (req, res) ->
   Store.findById req.params.store_id, (err, store) ->
-    res.status(500).send err if err
-    res.render 'admin/edit',
-      store: store
-      referrer: req.get "Referrer"
-      user: req.user
+    if err
+      res.status(500).send err
+    else
+      res.render 'admin/edit',
+        store: store
+        referrer: req.get "Referrer"
+        user: req.user
 
 
 # POST /stores/:store_id/edit : Update Stores
 # ------------------------------------------------------------------------------
 router.post '/stores/:store_id/edit', authHelpers.isAuthenticated, (req, res) ->
-  console.log req.body
   Store.findById req.params.store_id, (err, store) ->
     res.status(400).send err if err
     store = storeHelpers.requestToObject req, store
     store.save (err, updatedStore) ->
       res.status(400).send err if err
+      req.flash 'info', "#{updatedStore.name} sucessfully updated."
       res.redirect "/stores"
 
 
@@ -116,33 +126,76 @@ router.get '/stores/:store_id/delete', authHelpers.isAuthenticated, (req, res) -
   Store.remove
     _id: req.params.store_id
   , (err) ->
-    res.status(500).send err if err
-    res.redirect "/stores"
+    if err
+      res.status(500).send err
+    else
+      res.redirect "/stores"
 
 
 # ------------------------------------------------------------------------------
 # User Routes
 # ------------------------------------------------------------------------------
 
+# GET /users : User List
+# ------------------------------------------------------------------------------
+router.get "/users/", authHelpers.isAuthenticated, (req, res) ->
+  User.find {}, (err, users) ->
+    if err
+      res.status(500).send err
+    else
+      res.render "admin/user/index",
+        user: req.user
+        users: users
+        messages:
+          info: req.flash "info"
+          error: req.flash "error"
 
 # GET /users/:user_id : User settings
 # ------------------------------------------------------------------------------
-router.get "/users/:user_id", authHelpers.isAuthenticated, (req, res) ->
+router.get "/users/:user_id/edit", authHelpers.isAuthenticated, (req, res) ->
   User.findById req.params.user_id, (err, user) ->
     if err
       res.status(500).send err
     else if req.user._id.equals user._id
-      res.render "admin/user/show",
-      user: req.user
-      referrer: req.get "Referrer"
-      menu: "settings"
+      res.render "admin/user/edit",
+        user: req.user
+        referrer: req.get "Referrer"
+        menu: "settings"
+        messages:
+          info: req.flash "info"
+          error: req.flash "error"
+        newUser:
+          username: if req.query.username then req.query.username else ""
+          email: if req.query.email then req.query.email else ""
     else
       res.status(401).send "Not Authorized"
 
 # POST /users/:user_id : Process user settings form
 # ------------------------------------------------------------------------------
-router.post "/users/:user_id", authHelpers.isAuthenticated, (req, res) ->
+router.post "/users/:user_id/edit", authHelpers.isAuthenticated, authHelpers.validateUserForm, (req, res) ->
   User.findById req.params.user_id, (err, user) ->
+    res.status(500).send err if err
+    user.username = req.body.username
+    user.email = req.body.email
+    if req.body.password
+      user.password = req.body.password
+    user.save (err, updatedUser) ->
+      if err
+        res.status(500).send err
+      else
+        req.flash 'info', "User settings successfully updated."
+        res.redirect "/stores"
 
+router.post "/users/new", authHelpers.isAuthenticated, authHelpers.validateUserForm, (req, res) ->
+  user = new User
+    username: req.body.username
+    password: req.body.password
+    email: req.body.email
+  user.save (err, user) ->
+    if err
+      res.status(500).send err
+    else
+      req.flash "info", "New User Created"
+      res.redirect '/stores'
 
 module.exports = router

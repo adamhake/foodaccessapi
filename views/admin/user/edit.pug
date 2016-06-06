@@ -1,11 +1,14 @@
-extends ../main.pug
+extends ../../main.pug
 
 block content
-  div(class="wrapper -s-top")
+  div(class="wrapper -very-thin")
     if messages.error.length > 0
       div(class="messages -error -vanish")
         p(class="-white")= messages.error
     if messages.info.length > 0
       div(class="messages -info -vanish")
         p(class="-white")= messages.info
-  #storeList
+    h1(class="title") Edit Your User Settings
+    include ./userForm.pug
+    h1(class="title") Create New User
+    include ./newUserForm.pug

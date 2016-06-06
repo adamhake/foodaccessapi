@@ -8,7 +8,7 @@ module.exports.requestToObject = (req, store = false) ->
     city: req.body.city
     state: req.body.state
     zipcode: parseInt(req.body.zipcode)
-  if req.body.myPlate
+  if req.body.benefits
     benefits =
       freshOptions: if req.body.benefits.indexOf("freshOptions") == -1 then false else true
       snap: if req.body.benefits.indexOf("snap") == -1 then false else true
@@ -21,8 +21,9 @@ module.exports.requestToObject = (req, store = false) ->
       protein: if req.body.myPlate.indexOf("myPlateProtein") == -1 then false else true
       veggie: if req.body.myPlate.indexOf("myPlateVeggie") == -1 then false else true
   hours =
-    days: req.body.hourDays
-    months: req.body.hourMonths
+    days: req.body.hoursDays
+    months: req.body.hoursMonths
+    hours: req.body.hours
   if store
     store.address = address
     store.benefits = benefits
@@ -42,6 +43,9 @@ module.exports.requestToObject = (req, store = false) ->
       phone: req.body.phone
       category: req.body.category
       public: if req.body.public then true else false
+      location:
+        type: "Point"
+        coordinates: [0,0]
   return store
 
 module.exports.formatStoreResponse = (data) ->

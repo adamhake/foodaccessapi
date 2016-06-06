@@ -7,63 +7,75 @@ block content
       div(id="map" class="map" data-lat=store.location.coordinates[1] data-lng=store.location.coordinates[0])
     .two-col
       .section
-        h4(class="subheading -content") Status
+        h4(class="subheading -light -h-space-bottom-none") Status
         p(class="-large")= store.public ? "Public" : "Private"
       .section
-        h4(class="subheading -content") Address
+        h4(class="subheading -light -h-space-bottom-none") Address
         p(class="-large")= store.address.street
         if store.address.streetAux
           p= store.address.streetAux
         p(class="-large") #{store.address.city}, #{store.address.state} #{store.address.zipcode}
       .section
-        h4(class="subheading -content") Phone
+        h4(class="subheading -light -h-space-bottom-none") Phone
         p(class="-large")= store.humanPhone
+      .section
+        h4(class="subheading -light -h-space-bottom-none") Hours
+        p(class="-large")= store.hours.hours
+      .section
+        h4(class="subheading -light -h-space-bottom-none") Open Days
+        p(class="-large")= store.hours.days
+      .section
+        h4(class="subheading -light -h-space-bottom-none") Open Months
+        p(class="-large")= store.hours.months
+      .section
     .two-col
       .section
-        h4(class="subheading -content") Category
+        h4(class="subheading -light -h-space-bottom-none") Category
         p(class="-large")= store.humanCategory
       .section
-        h4(class="subheading") Benefits
+        h4(class="subheading -light") Benefits
         if store.benefits.wic
-          span(class="mult-select-option -active -display") WIC
+          span(class="multi-select-option -v-space-top -active -display") WIC
         else
-          span(class="mult-select-option -display") WIC
+          span(class="multi-select-option -v-space-top -display") WIC
 
         if store.benefits.snap
-          span(class="mult-select-option -active -display") SNAP
+          span(class="multi-select-option -v-space-top -active -display") SNAP
         else
-          span(class="mult-select-option -display") SNAP
+          span(class="multi-select-option -v-space-top -display") SNAP
 
         if store.benefits.freshOptions
-          span(class="mult-select-option -active -display") Fresh Options
+          span(class="multi-select-option -v-space-top -active -display") Fresh Options
         else
-          span(class="mult-select-option -display") Fresh Options
+          span(class="multi-select-option -v-space-top -display") Fresh Options
       .section
-        h4(class="subheading") My Plate Offerings
+        h4(class="subheading -light") My Plate Offerings
         if store.myPlate.dairy
-          span(class="mult-select-option -active -display") Dairy
+          span(class="multi-select-option -v-space-top -active -display") Dairy
         else
-          span(class="mult-select-option -display") Dairy
+          span(class="multi-select-option -v-space-top -display") Dairy
 
         if store.myPlate.fruit
-          span(class="mult-select-option -active -display") fruits
+          span(class="multi-select-option -v-space-top -active -display") fruits
         else
-          span(class="mult-select-option -display") fruits
+          span(class="multi-select-option -v-space-top -display") fruits
 
         if store.myPlate.grain
-          span(class="mult-select-option -active -display") Grains
+          span(class="multi-select-option -v-space-top -active -display") Grains
         else
-          span(class="mult-select-option -display") Grains
+          span(class="multi-select-option -v-space-top -display") Grains
 
         if store.myPlate.protein
-          span(class="mult-select-option -active -display") Protein
+          span(class="multi-select-option -v-space-top -active -display") Protein
         else
-          span(class="mult-select-option -display") Protein
+          span(class="multi-select-option -v-space-top -display") Protein
 
         if store.myPlate.veggie
-          span(class="mult-select-option -active -display") Vegetables
+          span(class="multi-select-option -v-space-top -active -display") Vegetables
         else
-          span(class="mult-select-option -display") Vegetables
+          span(class="multi-select-option -v-space-top -display") Vegetables
+      .section
+        h4(class="subheading -light") Available Meals
   .wrapper
     .section
       a(href="/stores/"+ store._id + "/edit" class="button") Edit
