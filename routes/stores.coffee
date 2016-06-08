@@ -10,13 +10,14 @@ express  = require 'express'
 router   = express.Router()
 Store    = require '../models/store'
 helpers  = require '../helpers/storeHelpers'
-cors     = require 'cors';
+cors     = require 'cors'
+apicache = require('apicache').options({ debug: false }).middleware
 
 # GET /stores : Return all stores
 # -------------------------------
 router.use cors()
 
-router.get '/', (req, res) ->
+router.get '/', apicache('1 day'), (req, res) ->
   if req.query.location
     bounds = req.query.bounds
     Store.findByLocation req.query.location, bounds, (err, stores) ->
