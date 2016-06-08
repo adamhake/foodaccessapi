@@ -15,7 +15,9 @@ apicache = require('apicache').options({ debug: false }).middleware
 
 # GET /stores : Return all stores
 # -------------------------------
-router.use cors()
+router.use cors(
+  credentials: false
+)
 
 router.get '/', apicache('1 day'), (req, res) ->
   if req.query.location
