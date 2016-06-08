@@ -13,6 +13,7 @@ module.exports.requestToObject = (req, store = false) ->
       freshOptions: if req.body.benefits.indexOf("freshOptions") == -1 then false else true
       snap: if req.body.benefits.indexOf("snap") == -1 then false else true
       wic: if req.body.benefits.indexOf("wic") == -1 then false else true
+      doubleBucks: if req.body.benefits.indexOf("doubleBucks") == -1 then false else true
   if req.body.myPlate
     myPlate =
       dairy: if req.body.myPlate.indexOf("myPlateDairy") == -1 then false else true

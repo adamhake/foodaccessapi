@@ -48,6 +48,11 @@ block content
           span(class="multi-select-option -v-space-top -active -display") Fresh Options
         else
           span(class="multi-select-option -v-space-top -display") Fresh Options
+
+        if store.benefits.doubleBucks
+          span(class="multi-select-option -v-space-top -active -display") Double Bucks
+        else
+          span(class="multi-select-option -v-space-top -display") Double Bucks
       .section
         h4(class="subheading -light") My Plate Offerings
         if store.myPlate.dairy

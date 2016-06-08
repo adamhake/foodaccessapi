@@ -43,9 +43,11 @@ form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new
       span(class="multi-select-option" data-value="wic") WIC
       span(class="multi-select-option" data-value="snap") SNAP
       span(class="multi-select-option" data-value="freshOptions") Fresh Options
+      span(class="multi-select-option" data-value="doubleBucks") Double Bucks
     input(class="-hidden" type="checkbox" name="benefits" value="wic" checked= store ? store.benefits.wic : false)
     input(class="-hidden" type="checkbox" name="benefits" value="snap" checked= store ? store.benefits.snap : false)
     input(class="-hidden" type="checkbox" name="benefits" value="freshOptions" checked= store ? store.benefits.freshOptions : false)
+    input(class="-hidden" type="checkbox" name="benefits" value="doubleBucks" checked= store ? store.benefits.doubleBucks : false)
   fieldset(class="form-element")
     legend
       i(class="fa fa-cutlery icon -inline")
