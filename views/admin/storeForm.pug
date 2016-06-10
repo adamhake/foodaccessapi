@@ -40,10 +40,10 @@ form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new
       | Benefits
 
     div(class="multi-select-group")
-      span(class="multi-select-option" data-value="wic") WIC
-      span(class="multi-select-option" data-value="snap") SNAP
-      span(class="multi-select-option" data-value="freshOptions") Fresh Options
-      span(class="multi-select-option" data-value="doubleBucks") Double Bucks
+      span(class="multi-select-option -v-space-top" data-value="wic") WIC
+      span(class="multi-select-option -v-space-top" data-value="snap") SNAP
+      span(class="multi-select-option -v-space-top" data-value="freshOptions") Fresh Options
+      span(class="multi-select-option -v-space-top" data-value="doubleBucks") Double Bucks
     input(class="-hidden" type="checkbox" name="benefits" value="wic" checked= store ? store.benefits.wic : false)
     input(class="-hidden" type="checkbox" name="benefits" value="snap" checked= store ? store.benefits.snap : false)
     input(class="-hidden" type="checkbox" name="benefits" value="freshOptions" checked= store ? store.benefits.freshOptions : false)
@@ -54,11 +54,11 @@ form(class="form" action=store ? "/stores/" + store._id + "/edit" : '/stores/new
       | My Plate Offerings
 
     div(class="multi-select-group")
-      span(class="multi-select-option" data-value="myPlateDairy") Dairy
-      span(class="multi-select-option" data-value="myPlateProtein") Proteins
-      span(class="multi-select-option" data-value="myPlateGrain") Grains
-      span(class="multi-select-option" data-value="myPlateVeggie") Vegetables
-      span(class="multi-select-option" data-value="myPlateFruit") Fruits
+      span(class="multi-select-option -v-space-top" data-value="myPlateDairy") Dairy
+      span(class="multi-select-option -v-space-top" data-value="myPlateProtein") Proteins
+      span(class="multi-select-option -v-space-top" data-value="myPlateGrain") Grains
+      span(class="multi-select-option -v-space-top" data-value="myPlateVeggie") Vegetables
+      span(class="multi-select-option -v-space-top" data-value="myPlateFruit") Fruits
     input(class="-hidden" type="checkbox" name="myPlate" value="myPlateDairy" checked= store ? store.myPlate.dairy : false)
     input(class="-hidden" type="checkbox" name="myPlate" value="myPlateProtein" checked= store ? store.myPlate.protein : false)
     input(class="-hidden" type="checkbox" name="myPlate" value="myPlateGrain" checked= store ? store.myPlate.grain : false)

@@ -1,5 +1,9 @@
 form {
-  margin-bottom: 5rem;
+  margin: 5rem auto;
+
+  &.-no-v-space-top{
+    margin-top: 0;
+  }
 }
 
 fieldset {
@@ -31,6 +35,7 @@ input[type="email"] {
   max-width: 610px;
   border: none;
   background-color: color(striping);
+  margin-top: 0.5rem;
 }
 
 input[name="city"] {
@@ -61,6 +66,7 @@ select.-hidden{
   width: 100%;
   max-width: 600px;
   margin-bottom: 1rem;
+  margin-top: 0.5rem;
 
   .fa-caret-down{
     transition: all 0.25s ease;

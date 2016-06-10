@@ -2,7 +2,7 @@ extends ./main.pug
 
 block content
   div(class="wrapper -very-thin -s-top")
-    h1(class="title -centered -no-space-top") Food Access Database
+    h1(class="title -centered") Food Access Database
     if messages.error.length > 0
       div(class="messages -error")
         p(class="-white")= messages.error
@@ -12,7 +12,7 @@ block content
     if messages.error.length == 0 && messages.info.length == 0
       p Please log in to continue
     .section
-      form(action="/login", method="POST" class="-very-thin")
+      form(action="/login", method="POST" class="-very-thin -no-v-space-top")
         fiedset(class="form-element")
           legend Username
           input(name="username" placeholder="Username" type="text" required)
